@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RStudio on Arvind Venkatadri</title>
+    <link>https://appliedmetaphorics.netlify.app/tags/rstudio/</link>
+    <description>Recent content in RStudio on Arvind Venkatadri</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>arvind.venkatadri@manipal.edu</managingEditor>
+    <webMaster>arvind.venkatadri@manipal.edu</webMaster>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://appliedmetaphorics.netlify.app/tags/rstudio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with R for Artists and Designers</title>
+      <link>https://appliedmetaphorics.netlify.app/post/2021-04-01-getting-started-with-r-for-artists-and-designers/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      <author>arvind.venkatadri@manipal.edu</author>
+      <guid>https://appliedmetaphorics.netlify.app/post/2021-04-01-getting-started-with-r-for-artists-and-designers/</guid>
+      <description>layout: true## Let’s get started—
+WindowsDownload R for Windows here
+Run the .exe file that was downloaded in the step above.
+Go to the RStudio Download page
+Under All Installers select RStudio current version ## - Windows XP/Vista/7/8/10.
+Double click the file to install it.
+Once R and RStudio are installed, open RStudio to make sure that you don’t get any error messages.</description>
+    </item>
+    
+    <item>
+      <title>Grammar of Graphics for Artists</title>
+      <link>https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/</link>
+      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
+      <author>arvind.venkatadri@manipal.edu</author>
+      <guid>https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/</guid>
+      <description>This RMarkdown document is derived from A Layered Grammar of Graphics by Hadley Wickham, which is on the Files folder.
+I strongly encourage you to glance through the original article, when you work more with this document.
+Esp. IAIDP,VCSB and HCD people. Oh, and FILM people.
+A Teaser from John SnowSnowMap(polygons = TRUE)# Write some comments on this code and what it seems to be creating# Are there &amp;quot;layers&amp;quot; in this visualization?</description>
+    </item>
+    
+  </channel>
+</rss>

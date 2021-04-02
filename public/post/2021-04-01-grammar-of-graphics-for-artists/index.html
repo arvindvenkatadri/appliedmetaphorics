@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Grammar of Graphics for Artists - Arvind Venkatadri</title>
+  <meta name="description" content="This RMarkdown document is derived from A Layered Grammar of Graphics by Hadley Wickham, which is on the Files folder.
+I strongly encourage you to glance through the original article, when you work more with this document.
+Esp. IAIDP,VCSB and HCD people. Oh, and FILM people.
+A Teaser from John SnowSnowMap(polygons = TRUE)# Write some comments on this code and what it seems to be creating# Are there &quot;layers&quot; in this visualization?"><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Arvind Venkatadri",
+    
+    "url": "https:\/\/appliedmetaphorics.netlify.app\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/appliedmetaphorics.netlify.app\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/appliedmetaphorics.netlify.app\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/appliedmetaphorics.netlify.app\/post\/2021-04-01-grammar-of-graphics-for-artists\/",
+          "name": "Grammar of graphics for artists"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Arvind Venkatadri"
+  },
+  "headline": "Grammar of Graphics for Artists",
+  "description" : "This RMarkdown document is derived from A Layered Grammar of Graphics by Hadley Wickham, which is on the Files folder.\nI strongly encourage you to glance through the original article, when you work more with this document.\nEsp. IAIDP,VCSB and HCD people. Oh, and FILM people.\nA Teaser from John Snow\rSnowMap(polygons = TRUE)\r# Write some comments on this code and what it seems to be creating\r# Are there \u0026quot;layers\u0026quot; in this visualization?",
+  "inLanguage" : "en",
+  "wordCount":  2163 ,
+  "datePublished" : "2021-02-14T00:00:00",
+  "dateModified" : "2021-02-14T00:00:00",
+  "image" : "https:\/\/appliedmetaphorics.netlify.app\/img\/avatar-icon.png",
+  "keywords" : [ "R Markdown, RStudio" ],
+  "mainEntityOfPage" : "https:\/\/appliedmetaphorics.netlify.app\/post\/2021-04-01-grammar-of-graphics-for-artists\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/appliedmetaphorics.netlify.app\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/appliedmetaphorics.netlify.app\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Grammar of Graphics for Artists" />
+<meta property="og:description" content="This RMarkdown document is derived from A Layered Grammar of Graphics by Hadley Wickham, which is on the Files folder.
+I strongly encourage you to glance through the original article, when you work more with this document.
+Esp. IAIDP,VCSB and HCD people. Oh, and FILM people.
+A Teaser from John SnowSnowMap(polygons = TRUE)# Write some comments on this code and what it seems to be creating# Are there &quot;layers&quot; in this visualization?">
+<meta property="og:image" content="https://appliedmetaphorics.netlify.app/img/avatar-icon.png" />
+<meta property="og:url" content="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Arvind Venkatadri" />
+
+  <meta name="twitter:title" content="Grammar of Graphics for Artists" />
+  <meta name="twitter:description" content="This RMarkdown document is derived from A Layered Grammar of Graphics by Hadley Wickham, which is on the Files folder.
+I strongly encourage you to glance through the original article, when you work …">
+  <meta name="twitter:image" content="https://appliedmetaphorics.netlify.app/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@arvind_v" />
+  <meta name="twitter:creator" content="@arvind_v" />
+  <link href='https://appliedmetaphorics.netlify.app/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.81.0" />
+  <link rel="alternate" href="https://appliedmetaphorics.netlify.app/index.xml" type="application/rss+xml" title="Arvind Venkatadri"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://appliedmetaphorics.netlify.app/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://appliedmetaphorics.netlify.app/css/highlight.min.css" /><link rel="stylesheet" href="https://appliedmetaphorics.netlify.app/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://appliedmetaphorics.netlify.app/">Arvind Venkatadri</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Writings" href="/">Writings</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Arvind Venkatadri" href="https://appliedmetaphorics.netlify.app/">
+            <img class="avatar-img" src="https://appliedmetaphorics.netlify.app/img/avatar-icon.png" alt="Arvind Venkatadri" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Grammar of Graphics for Artists</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on February 14, 2021
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;11&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;2163&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Arvind Venkatadri
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+<script src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<p>This RMarkdown document is derived from <em>A Layered Grammar of Graphics</em> by Hadley Wickham, which is on the Files folder.</p>
+<p>I strongly encourage you to glance through the original article, when you work more with this document.</p>
+<p>Esp. IAIDP,VCSB and HCD people. Oh, and FILM people.</p>
+<div id="a-teaser-from-john-snow" class="section level2">
+<h2>A Teaser from John Snow</h2>
+<pre class="r"><code>SnowMap(polygons = TRUE)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/teaser-1.png" width="672" /></p>
+<pre class="r"><code># Write some comments on this code and what it seems to be creating
+# Are there &quot;layers&quot; in this visualization?</code></pre>
+</div>
+<div id="components-of-the-layered-grammar-of-graphics" class="section level2">
+<h2>Components of the layered grammar of graphics</h2>
+<div id="layer" class="section level3">
+<h3>Layer</h3>
+<p><strong>Layers</strong> are used to create the objects on a plot. They are defined by five basic parts:</p>
+<ol style="list-style-type: decimal">
+<li>Data ( What dataset/spreadsheet am I using?)</li>
+<li>Mapping ( What does each column do in my graph?)</li>
+<li>Statistical transformation (stat) (Do I have calculate something first?)</li>
+<li>Geometric object (geom) ( What shape, colour, size..do I want?)</li>
+<li>Position adjustment (position) ( Where do I want it on the graph?)</li>
+</ol>
+<div id="tidy-data" class="section level4">
+<h4>Tidy Data</h4>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/tidydata_1.jpg" alt="" />
+<p class="caption">Tidy data</p>
+</div>
+</div>
+<div id="kids-of-variables" class="section level4">
+<h4>Kids of Variables</h4>
+<p><strong>Kinds of Variable</strong> are defined by the kind of questions they answer to:</p>
+<ol style="list-style-type: decimal">
+<li>What/Who/Where? -&gt; Some kind of Name or Category (Remember Lars Gustaffson)</li>
+<li>What Kind? How? -&gt; Some kind “Type”</li>
+<li>How Many? How large? -&gt; Some kind of Quantity</li>
+</ol>
+</div>
+</div>
+<div id="data-and-mapping" class="section level3">
+<h3>Data and mapping</h3>
+<p>We will use “real world” data. Let’s use the <code>penguins</code> dataset in the <code>palmerpenguins</code> package.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<pre class="r"><code>head(penguins, n = 3)</code></pre>
+<pre><code>## # A tibble: 3 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Adelie  Torge~           39.1          18.7              181        3750 male 
+## 2 Adelie  Torge~           39.5          17.4              186        3800 fema~
+## 3 Adelie  Torge~           40.3          18                195        3250 fema~
+## # ... with 1 more variable: year &lt;int&gt;</code></pre>
+<pre class="r"><code>tail(penguins)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Chinst~ Dream            45.7          17                195        3650 fema~
+## 2 Chinst~ Dream            55.8          19.8              207        4000 male 
+## 3 Chinst~ Dream            43.5          18.1              202        3400 fema~
+## 4 Chinst~ Dream            49.6          18.2              193        3775 male 
+## 5 Chinst~ Dream            50.8          19                210        4100 male 
+## 6 Chinst~ Dream            50.2          18.7              198        3775 fema~
+## # ... with 1 more variable: year &lt;int&gt;</code></pre>
+<pre class="r"><code>dim(penguins)</code></pre>
+<pre><code>## [1] 344   8</code></pre>
+<pre class="r"><code>#?penguins</code></pre>
+<p><strong>Aesthetic Mapping</strong> defines how the variables are applied to the plot. So if we were graphing information from <code>penguins</code>, we might map a penguin’s flipper_length_mm to the <span class="math inline">\(x\)</span> position and body_mass_g to the <span class="math inline">\(y\)</span> position.
+We can map variables metaphorically to other things: shape, colour, size, alpha(how dark?)….</p>
+<p>For our running example,</p>
+<pre class="r"><code>penguins %&gt;%
+  select(bill_length_mm,body_mass_g) %&gt;%
+  rename(x = bill_length_mm,
+         y = body_mass_g)</code></pre>
+<pre><code>## # A tibble: 344 x 2
+##        x     y
+##    &lt;dbl&gt; &lt;int&gt;
+##  1  39.1  3750
+##  2  39.5  3800
+##  3  40.3  3250
+##  4  NA      NA
+##  5  36.7  3450
+##  6  39.3  3650
+##  7  38.9  3625
+##  8  39.2  4675
+##  9  34.1  3475
+## 10  42    4250
+## # ... with 334 more rows</code></pre>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(mapping = aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point() + 
+  geom_smooth(method = &quot;lm&quot;, se = TRUE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 2 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/mapping-1.png" width="672" /></p>
+</div>
+</div>
+<div id="statistical-transformation" class="section level2">
+<h2>Statistical transformation</h2>
+<p>A <strong>statistical transformation</strong> (<em>stat</em>) transforms the data, generally by summarizing the information. For instance, in a bar graph you might summarize the data by graphing the total number of observations within a set of categories.</p>
+<p>A stat is a function that takes in a dataset as the input and returns a dataset as the output; a stat can add new variables to the original dataset, or create an entirely new dataset. So instead of graphing this data in its raw form:</p>
+<pre class="r"><code>penguins %&gt;%
+  select(island)</code></pre>
+<pre><code>## # A tibble: 344 x 1
+##    island   
+##    &lt;fct&gt;    
+##  1 Torgersen
+##  2 Torgersen
+##  3 Torgersen
+##  4 Torgersen
+##  5 Torgersen
+##  6 Torgersen
+##  7 Torgersen
+##  8 Torgersen
+##  9 Torgersen
+## 10 Torgersen
+## # ... with 334 more rows</code></pre>
+<p>You would transform it to:</p>
+<pre class="r"><code>penguins %&gt;%
+  count(island)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   island        n
+##   &lt;fct&gt;     &lt;int&gt;
+## 1 Biscoe      168
+## 2 Dream       124
+## 3 Torgersen    52</code></pre>
+<p>Sometimes you don’t need to make a statistical transformation. For example, in a scatterplot you use the raw values for the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables to map onto the graph. In these situations, the statistical transformation is an <em>identity</em> transformation - the stat simply passes in the original dataset and exports the exact same dataset.</p>
+</div>
+<div id="geometric-objects" class="section level2">
+<h2>Geometric objects</h2>
+<p><strong>Geometric objects</strong> (<em>geoms</em>) control the type of plot you create. Geoms are classified by their dimensionality:</p>
+<ul>
+<li>0 dimensions - point, text</li>
+<li>1 dimension - path, line</li>
+<li>2 dimensions - polygon, interval</li>
+</ul>
+<p>Each geom can only display certain <strong>aesthetics</strong> or visual attributes of the geom. For example, a point geom has position, color, shape, and size aesthetics.</p>
+<pre class="r"><code>ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, # x-position =&gt; bill_length_mm
+                     y = body_mass_g, # y-position =&gt; body_mass_g
+                     color = island)) + # color =&gt; Island as Metaphor
+  geom_point() +
+  ggtitle(&quot;A point geom with position and color aesthetics&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_point_position_colour-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = penguins, 
+       mapping = aes(x = bill_length_mm, 
+                     y = body_mass_g, 
+                     color = species, 
+                     shape = island)) +
+  geom_point() +
+  ggtitle(&quot;A point geom with position and color and shape aesthetics&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_point_position_colour_shape-1.png" width="672" /></p>
+<ul>
+<li>Position defines where each point is drawn on the plot</li>
+<li>Color defines the color of each point. Here the color is determined by the class of the car (observation)</li>
+</ul>
+<p>Whereas a bar geom has position, height, width, and fill color.</p>
+<pre class="r"><code>ggplot(data = penguins, 
+       aes(x = species)) + # x position =&gt; ?
+  # No need to type &quot;mapping&quot;...
+  geom_bar() + # Where does the height come from?
+  ggtitle(&quot;A bar geom with position and height aesthetics&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_bar-1-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = penguins, aes(x = species)) +
+  geom_bar() +
+  ggtitle(&quot;A bar geom with position and height aesthetics&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_bar-2-1.png" width="672" /></p>
+<ul>
+<li>Position determines the starting location (origin) of each bar</li>
+<li>Height determines how tall to draw the bar. Here the height is based on the number of observations in the dataset for each possible number of cylinders.</li>
+</ul>
+</div>
+<div id="position-adjustment" class="section level2">
+<h2>Position adjustment</h2>
+<p>Sometimes with dense data we need to adjust the position of elements on the plot, otherwise data points might obscure one another. Bar plots frequently <strong>stack</strong> or <strong>dodge</strong> the bars to avoid overlap:</p>
+<pre class="r"><code>count(x = penguins, species, island) %&gt;%
+  ggplot(mapping = aes(x = species, y = n, fill = island)) +
+  geom_bar(stat = &quot;identity&quot;) +
+  ggtitle(label = &quot;A stacked bar chart&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_bar_position_stack_and_dodge-1.png" width="672" /></p>
+<pre class="r"><code>count(x = penguins, species, island) %&gt;%
+  ggplot(mapping = aes(x = species, y = n, fill = island)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  ggtitle(label = &quot;A dodged bar chart&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/geom_bar_position_stack_and_dodge-2.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(mapping = aes(x = species, fill = island)) +
+  geom_bar() +
+  ggtitle(label = &quot;A stacked bar chart&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(mapping = aes(x = species, fill = island)) +
+  geom_bar(position = &quot;dodge&quot;) +
+  ggtitle(label = &quot;A dodged bar chart&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<p>Sometimes scatterplots with few unique <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> values are <strong>jittered</strong> (random noise is added) to reduce overplotting.</p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
+  geom_point() +
+  ggtitle(&quot;A point geom with obscured data points&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/position-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = species, y = body_mass_g)) +
+  geom_jitter() +
+  ggtitle(&quot;A point geom with jittered data points&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/position-2.png" width="672" /></p>
+</div>
+<div id="scale" class="section level2">
+<h2>Scale</h2>
+<p>A <strong>scale</strong> controls how data is mapped to aesthetic attributes, so we need one scale for every aesthetic property employed in a layer. For example, this graph defines a scale for color:</p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_depth_mm, y = bill_length_mm, color = species)) +
+  geom_point() </code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/scale_color-1.png" width="672" /></p>
+<p>Note that the scale is consistent - every point for a particular species of penguin is drawn in the same colour. The scale can be changed to use a different color palette:</p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  scale_color_brewer(palette = &quot;Dark2&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/scale_color_palette-1.png" width="672" /></p>
+<p>Now we are using a different palette, but the scale is still consistent: all Adelie penguins utilize the same color, whereas Chinstrap use a new color <strong>but each Adelie still uses the same, consistent color</strong>.</p>
+</div>
+<div id="coordinate-system" class="section level2">
+<h2>Coordinate system</h2>
+<p>A <strong>coordinate system</strong> (<em>coord</em>) maps the position of objects onto the plane of the plot, and controls how the axes and grid lines are drawn. Plots typically use two coordinates (<span class="math inline">\(x, y\)</span>), but could use any number of coordinates. Most plots are drawn using the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system"><strong>Cartesian coordinate system</strong></a>:</p>
+<pre class="r"><code>x1 &lt;- c(1, 10)
+y1 &lt;- c(1, 5)
+p &lt;- qplot(x = x1, y = y1, geom = &quot;point&quot;, xlab = NULL, ylab = NULL) + theme_bw()
+p +
+  ggtitle(label = &quot;Cartesian coordinate system&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_cart-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() +
+  aes(x = flipper_length_mm, y = body_mass_g) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_cart-2.png" width="672" /></p>
+<p>This system requires a fixed and equal spacing between values on the axes. That is, the graph draws the same distance between 1 and 2 as it does between 5 and 6. The graph could be drawn using a <a href="https://en.wikipedia.org/wiki/Semi-log_plot"><strong>semi-log coordinate system</strong></a> which logarithmically compresses the distance on an axis:</p>
+<pre class="r"><code>p +
+  coord_trans(y = &quot;log10&quot;) +
+  ggtitle(label = &quot;Semi-log coordinate system&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_semi_log-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() +
+  aes(x = flipper_length_mm, y = body_mass_g) +
+  geom_point() +
+  scale_y_continuous(limits = c(2000,15000)) +
+  coord_trans(y = &quot;log10&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_semi_log-2.png" width="672" /></p>
+<p>Or could even be drawn using <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system"><strong>polar coordinates</strong></a>:</p>
+<pre class="r"><code>p +
+  coord_polar() +
+  ggtitle(label = &quot;Polar coordinate system&quot;)</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_polar-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() + 
+  aes(x = species, fill = island) +
+  geom_bar(position = &quot;stack&quot;) + 
+  coord_polar()</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/coord_polar-2.png" width="672" /></p>
+</div>
+<div id="faceting" class="section level2">
+<h2>Faceting</h2>
+<p><strong>Faceting</strong> can be used to split the data up into subsets of the entire dataset. This is a powerful tool when investigating whether patterns are the same or different across conditions, and allows the subsets to be visualized on the same plot (known as <strong>conditioned</strong> or <strong>trellis</strong> plots). The faceting specification describes which variables should be used to split up the data, and how they should be arranged.</p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point() +
+  facet_wrap(~species)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/facet-1-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = penguins) +
+  aes(x = bill_length_mm, y = body_mass_g, color = sex) +
+  geom_point() +
+  facet_grid(species~island)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/facet-2-1.png" width="672" /></p>
+</div>
+<div id="defaults" class="section level2">
+<h2>Defaults</h2>
+<p>Rather than explicitly declaring each component of a layered graphic (which will use more code and introduces opportunities for errors), we can establish intelligent defaults for specific geoms and scales. For instance, whenever we want to use a bar geom, we can default to using a stat that counts the number of observations in each group of our variable in the <span class="math inline">\(x\)</span> position.</p>
+<p>Consider the following scenario: you wish to generate a scatterplot visualizing the relationship between penguins’ bill_length and their body_mass. With no defaults, the code to generate this graph is:</p>
+<pre class="r"><code>ggplot() +
+  layer(
+    data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g),
+    geom = &quot;point&quot;, stat = &quot;identity&quot;, position = &quot;identity&quot;
+  ) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_cartesian()</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/default-1.png" width="672" /></p>
+<p>The above code:</p>
+<ul>
+<li><p>Creates a new plot object (<code>ggplot</code>)</p></li>
+<li><p>Adds a layer (<code>layer</code>)</p>
+<ul>
+<li>Specifies the data (<code>penguins</code>)</li>
+<li>Maps engine bill length to the <span class="math inline">\(x\)</span> position and body mass to the <span class="math inline">\(y\)</span> position (<code>mapping</code>)</li>
+<li>Uses the point geometric transformation (<code>geom = "point"</code>)</li>
+<li>Implements an identity transformation and position (<code>stat = "identity"</code> and <code>position = "identity"</code>)</li>
+</ul></li>
+<li><p>Establishes two continuous position scales (<code>scale_x_continuous</code> and <code>scale_y_continuous</code>)</p></li>
+<li><p>Declares a cartesian coordinate system (<code>coord_cartesian</code>)</p></li>
+</ul>
+<p>How can we simplify this using intelligent defaults?</p>
+<ol style="list-style-type: decimal">
+<li><p>We only need to specify one geom and stat, since each geom has a default stat.</p></li>
+<li><p>Cartesian coordinate systems are most commonly used, so it should be the default.</p></li>
+<li><p>Default scales can be added based on the aesthetic and type of variables.</p>
+<ul>
+<li>Continuous values are transformed with a linear scaling.</li>
+<li>Discrete values are mapped to integers.</li>
+<li>Scales for aesthetics such as color, fill, and size can also be intelligently defaulted.</li>
+</ul></li>
+</ol>
+<p>Using these defaults, we can rewrite the above code as:</p>
+<pre class="r"><code>ggplot() +
+  geom_point(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g))</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/default2-1.png" width="672" /></p>
+<p>This generates the exact same plot, but uses fewer lines of code. Because multiple layers can use the same components (data, mapping, etc.), we can also specify that information in the <code>ggplot()</code> function rather than in the <code>layer()</code> function:</p>
+<pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/default3-1.png" width="672" /></p>
+<p>And as we will learn, function arguments in R use specific ordering, so we can omit the explicit call to <code>data</code> and <code>mapping</code>:</p>
+<pre class="r"><code>ggplot(penguins, aes(bill_length_mm, body_mass_g)) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="https://appliedmetaphorics.netlify.app/post/2021-04-01-grammar-of-graphics-for-artists/index.en_files/figure-html/default4-1.png" width="672" /></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Run <code>?penguins</code> in the console to get more information about this dataset.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://appliedmetaphorics.netlify.app//tags/r-markdown/">R Markdown</a>&nbsp;
+            
+              <a href="https://appliedmetaphorics.netlify.app//tags/rstudio/">RStudio</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f&amp;text=Grammar%20of%20Graphics%20for%20Artists&amp;via=arvind_v" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f&amp;title=Grammar%20of%20Graphics%20for%20Artists" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f&amp;title=Grammar%20of%20Graphics%20for%20Artists" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f&amp;title=Grammar%20of%20Graphics%20for%20Artists" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fappliedmetaphorics.netlify.app%2fpost%2f2021-04-01-grammar-of-graphics-for-artists%2f&amp;description=Grammar%20of%20Graphics%20for%20Artists" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/2021-04-01-getting-started-with-r-for-artists-and-designers/">Getting Started with R for Artists and Designers</a></li>
+                
+                    <li><a href="/post/2020-12-01-r-rmarkdown/">Hello R Markdown</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://appliedmetaphorics.netlify.app/post/grammar-of-graphics/" data-toggle="tooltip" data-placement="top" title="The Grammar of Graphics">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://appliedmetaphorics.netlify.app/post/getting-started-with-r/" data-toggle="tooltip" data-placement="top" title="Getting Started with R">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:arvind.venkatadri@manipal.edu" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/arvindvenkatadri" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/arvind_v" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/arvindvenkatadri" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://appliedmetaphorics.netlify.app/">Arvind Venkatadri</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.81.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://appliedmetaphorics.netlify.app/js/main.js"></script>
+<script src="https://appliedmetaphorics.netlify.app/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://appliedmetaphorics.netlify.app/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

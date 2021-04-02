@@ -21,7 +21,7 @@ Params:
   rss: yes
   showRelatedPosts: yes
   socialShare: yes
-  subtitle: Sharing Code and other Ideas
+  subtitle: Sharing Code,Teaching Experiences, and other Ideas
   useHLJS: yes
   wordCount: yes
 Author:
@@ -29,7 +29,7 @@ Author:
   # bandcamp: username
   # bitbucket: username
   # codepen: username
-  email: youremail@domain.com
+  email: arvind.venkatadri@manipal.edu
   # facebook: username
   github: arvindvenkatadri
   # gitlab: username
@@ -55,7 +55,7 @@ Author:
   # youtube: user/username
 menu:
   main:
-    - name: Blog
+    - name: Writings
       url: ''
       weight: 1
     - name: About
