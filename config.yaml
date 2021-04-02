@@ -1,4 +1,4 @@
-baseurl: https://appliedmetaphorics.netlify.app/
+baseurl: "https://appliedmetaphorics.netlify.app/"
 DefaultContentLanguage: en
 title: Arvind Venkatadri
 theme: beautifulhugo
