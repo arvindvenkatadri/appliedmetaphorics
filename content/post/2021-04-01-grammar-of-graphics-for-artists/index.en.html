@@ -13,8 +13,8 @@ subtitle: ''
 image: ''
 output:
   html_document:
-    toc: yes
-    toc_float: yes
+    toc: true
+    toc_float: true
     theme: yeti
     keep_md: true
     code_download: true
@@ -86,8 +86,7 @@ output:
 ## # ... with 1 more variable: year &lt;int&gt;</code></pre>
 <pre class="r"><code>dim(penguins)</code></pre>
 <pre><code>## [1] 344   8</code></pre>
-<pre class="r"><code>?penguins</code></pre>
-<pre><code>## starting httpd help server ... done</code></pre>
+<pre class="r"><code>#?penguins</code></pre>
 <p><strong>Aesthetic Mapping</strong> defines how the variables are applied to the plot. So if we were graphing information from <code>penguins</code>, we might map a penguin’s flipper_length_mm to the <span class="math inline">\(x\)</span> position and body_mass_g to the <span class="math inline">\(y\)</span> position.
 We can map variables metaphorically to other things: shape, colour, size, alpha(how dark?)….</p>
 <p>For our running example,</p>
@@ -238,7 +237,7 @@ We can map variables metaphorically to other things: shape, colour, size, alpha(
   geom_point() </code></pre>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/scale_color-1.png" width="672" /></p>
-<p>Note that the scale is consistent - every point for a compact car is drawn in tan, whereas SUVs are drawn in pink. The scale can be changed to use a different color palette:</p>
+<p>Note that the scale is consistent - every point for a particular species of penguin is drawn in the same colour. The scale can be changed to use a different color palette:</p>
 <pre class="r"><code>ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g, color = species)) +
   geom_point() +
   scale_color_brewer(palette = &quot;Dark2&quot;)</code></pre>
@@ -251,21 +250,37 @@ We can map variables metaphorically to other things: shape, colour, size, alpha(
 <p>A <strong>coordinate system</strong> (<em>coord</em>) maps the position of objects onto the plane of the plot, and controls how the axes and grid lines are drawn. Plots typically use two coordinates (<span class="math inline">\(x, y\)</span>), but could use any number of coordinates. Most plots are drawn using the <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system"><strong>Cartesian coordinate system</strong></a>:</p>
 <pre class="r"><code>x1 &lt;- c(1, 10)
 y1 &lt;- c(1, 5)
-p &lt;- qplot(x = x1, y = y1, geom = &quot;blank&quot;, xlab = NULL, ylab = NULL) +
-  theme_bw()
+p &lt;- qplot(x = x1, y = y1, geom = &quot;point&quot;, xlab = NULL, ylab = NULL) + theme_bw()
 p +
   ggtitle(label = &quot;Cartesian coordinate system&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_cart-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() +
+  aes(x = flipper_length_mm, y = body_mass_g) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_cart-2.png" width="672" /></p>
 <p>This system requires a fixed and equal spacing between values on the axes. That is, the graph draws the same distance between 1 and 2 as it does between 5 and 6. The graph could be drawn using a <a href="https://en.wikipedia.org/wiki/Semi-log_plot"><strong>semi-log coordinate system</strong></a> which logarithmically compresses the distance on an axis:</p>
 <pre class="r"><code>p +
   coord_trans(y = &quot;log10&quot;) +
   ggtitle(label = &quot;Semi-log coordinate system&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_semi_log-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() +
+  aes(x = flipper_length_mm, y = body_mass_g) +
+  geom_point() +
+  scale_y_continuous(limits = c(2000,15000)) +
+  coord_trans(y = &quot;log10&quot;)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_semi_log-2.png" width="672" /></p>
 <p>Or could even be drawn using <a href="https://en.wikipedia.org/wiki/Polar_coordinate_system"><strong>polar coordinates</strong></a>:</p>
 <pre class="r"><code>p +
   coord_polar() +
   ggtitle(label = &quot;Polar coordinate system&quot;)</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_polar-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;% ggplot() + 
+  aes(x = species, fill = island) +
+  geom_bar(position = &quot;stack&quot;) + 
+  coord_polar()</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/coord_polar-2.png" width="672" /></p>
 </div>
 <div id="faceting" class="section level2">
 <h2>Faceting</h2>
@@ -275,11 +290,12 @@ p +
   facet_wrap(~species)</code></pre>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/facet-1-1.png" width="672" /></p>
-<pre class="r"><code># ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = body_mass_g, color = sex)) +
-#   geom_point(aes(x = sex)) +
-#   facet_grid(species~island)
-
-# Ria&#39;s explanation: This code did not work becasue....</code></pre>
+<pre class="r"><code>ggplot(data = penguins) +
+  aes(x = bill_length_mm, y = body_mass_g, color = sex) +
+  geom_point() +
+  facet_grid(species~island)</code></pre>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/facet-2-1.png" width="672" /></p>
 </div>
 <div id="defaults" class="section level2">
 <h2>Defaults</h2>
