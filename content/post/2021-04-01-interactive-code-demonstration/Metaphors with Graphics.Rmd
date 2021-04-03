@@ -1,0 +1,716 @@
+---
+title: "Metaphors with Graphics"
+subtitle: "For Artists and non-Coders"
+caption: "Made with the xaringan package"
+author: "Arvind Venkatadri"
+institute: "Srishti Manipal Institute"
+date: "(`r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_ir: libs
+    css: ["default", "ninjutsu", "code_demo.css", "fonts_mtheme.css"]
+    # yolo: false
+    #   img: images/Scottish_Fold_Cat.jpg 
+    #   times: 5
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      # autoplay: 30000
+      #countdown: 60000
+---
+
+name: title_slide
+
+## To ~~err~~ R is human
+
+Let's talk about what our Generic Skills course is all about. 
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.dim=c(4.8, 8), fig.retina=2, out.width="100%")
+library(tidyverse)
+library(knitr)
+library(palmerpenguins)
+library(HistData)
+library(nomnoml)
+
+# install.packages("devtools")
+# devtools::install_github("hadley/emo")
+library(emo)
+library(emojifont) 
+#https://cran.r-project.org/web/packages/emojifont/vignettes/emojifont.html
+
+```
+
+name: content
+class: spaced
+
+## Contents
+
+* [RStudio](#rstudio) What the heck am I looking at?
+* [RMarkdown](#intro_rmarkdown)
+* [Slides](#slides)
+* [Layout](#layout)
+* [Text formatting](#text_formatting_1)
+* [Code formatting](#code)
+* [Lists](#lists)
+* [Images](#images_markdown)
+* [Math expressions](#math)
+* [Tables](#table_kable)
+* [Static plots](#plot_static_base)
+* [Interactive plots](#plot_interactive_highcharter)
+* [Maps](#plot_interactive_leaflet)
+* [Crosstalk](#plot_interactive_crosstalk)
+* [General tips](#tips)
+
+---
+# What are we going to do
+We will:
+
+--
+
+1.  First examine data and geometric graphics from a metaphoric standpoint.
+
+--
+
+2.  Develop graphics using a bunch of "graphical metaphors"
+
+--
+
+3.  Try to do that in something resembling **English gRammaR** ( well, nearly, it is code after all !!)
+
+---
+# And Why R we doing this, again?
+
+--
+
+### We are deeply interested in the making and analysis of metaphors
+
+--
+
+### This will help us appreciate **TRIZ** when we get there!
+
+
+---
+layout: true
+# How R we going to do it?
+---
+
+- Metaphors take information from a *source* **DOMAIN**. 
+
+- And portray it in the *language* of the *target* Domain
+
+---
+
+- In R, we will take data from diverse **source Domains**
+
+  - Ecology
+  - Finance
+  - Jewellery ( yeah!)
+  - Weather
+  - Star Wars
+  - ...
+
+--
+
+- And make metaphors out of them
+
+---
+
+- Only our **target Domain** will be...Geometry. Hence, **R**
+
+--
+
+- Did I say: "To R is human"....
+
+
+---
+layout: true
+## How does one read Shakespeare? 
+---
+
+Well, you learn 
+- the alphabet and then words, vocab; 
+
+- **and then** sentences, paras, idioms, figure of speech; 
+
+- **and then** poetry along with cadence, prosody, and metre; 
+
+- **and then** drama and Greek Choruses.....
+
+--
+
+- And then you read Shakespeare. Simple.
+
+---
+
+NO.
+
+--
+
+You read Shakespeare directly, and reach for a dictionary when needed. 
+
+And you get better at it as you go. 
+
+--
+
+We will do that also with ~~ShakespeaRe~~ R.
+
+---
+
+In the following, there are ready-made Shakespearean pieces of R code. 
+
+
+(Oh, all right, all right, all right. )
+
+--
+
+~~To code or not to code, that is the question...~~
+
+--
+
+There's not to reason why, there's but to code and ~~die~~ fly!!
+
+---
+layout: false
+
+name: r-studio
+
+## What on earth am I looking at?
+This is **RStudio**, a integrated development environment ( IDE ) for **R**
+
+( And Python, JS, SQL, D3 and a few other computer languages. )
+
+![RStudio](https://bookdown.org/maddocent/exploratory_data_analysis/_book/images/rstudio_interface.png)
+
+---
+
+# OK, what the Heck are R and RStudio?
+
+.pull-left[
+1.  [R](https://cran.r-project.org/) is a free and open source language
+
+
+![R](https://www.r-project.org/Rlogo.png)
+
+]
+
+.pull-right[
+2. RStudio is a programming environment that makes R coding easy.
+
+![RStudio](https://d33wubrfki0l68.cloudfront.net/62bcc8535a06077094ca3c29c383e37ad7334311/a263f/assets/img/logo.svg)
+]
+
+
+---
+background-image: url("https://64.media.tumblr.com/5b597a2ad23f997216ee85a0b4420ffe/tumblr_offcw8Xas61v85w7qo1_400.gifv")
+background-position: center
+background-size: contain
+
+## R ! Whatever is it good for?
+
+???
+Image Credit(https://mesyman.tumblr.com/post/152219845477)
+
+---
+
+## Absolutely Anything !!
+
+.pull-left[
+-   [Showing Off!](https://www.data-to-viz.com/)
+
+-   [More Showing Off!](https://kind-varahamihira.netlify.app/)
+
+-   [**Generative Art**](https://www.data-imaginist.com/art)
+
+-   [Making Maps!!](https://bhaskarvk.github.io/user2017.geodataviz/notebooks/03-Interactive-Maps.nb.html) and [Water-Color Maps](http://maps.stamen.com/#watercolor/12/1.3164/103.8338)
+
+]
+.pull-right[
+-   [Interactive web pages,blogs,](https://blog.rstudio.com/2017/09/11/announcing-blogdown/)
+
+-   [Analysing Books](https://juliasilge.com/blog/tidy-text-classification/)
+
+-   [Writing Books](https://bookdown.org/yihui/bookdown/)
+
+-   Statistical computing and machine learning and AI and...[Are you sure you want to see this?](No....)
+]
+
+All depends upon your imagination.
+
+---
+
+layout: true
+# PRIMM Process
+
+---
+
+
+- **PREDICT** what the code does, write predictions. Work In pairs
+--
+
+
+> *I think Hamlet was gay*
+
+---
+
+- **RUN** the code provided and see what it does. Check against your prediction
+
+--
+> *I am going to say "forsooth" in my Reflections*
+
+---
+
+- **INVESTIGATE** What the **code parameters** do ?
+
+> Write **comments** to explain
+
+> There are lots of different activities you can do at this stage: 
+> - trace through the code, 
+- comment the code, 
+- answer questions about it, 
+- label particular concepts, highlight it, 
+- draw the flow of control, etc.  
+
+
+--
+
+> \# Hamlet is not Gay.  
+
+> \# (Also, Arvind is not Cool. Sorry. )
+
+> \# This R shape thingy makes everything into small squares...
+
+---
+
+- **MODIFY** the code parameters provided to understand the options available. 
+
+--
+
+> Sword = "pink" ? 
+
+> Size = Uneasy_Crown?
+
+---
+
+- **MAKE** : take an idea/concept/data of your own, and graph it. 
+
+--
+
+> ( My next Insta will be an Outrageous Sling of Fortune...). 
+
+
+
+---
+
+- **Predict**: What could happen?
+
+- **Run**: the code and see
+
+- **Investigate**: What could really be happening?
+
+- **Modify**: Mess with the code and try
+
+- **Make**: Some thing brand new for yourself
+
+
+### Reference: 
+
+https://blogs.kcl.ac.uk/cser/2017/09/01/primm-a-structured-approach-to-teaching-programming/
+
+
+
+
+
+--
+
+Click on this icon in your Applications folder:
+
+.center[
+![this icon](https://d33wubrfki0l68.cloudfront.net/521a038ed009b97bf73eb0a653b1cb7e66645231/8e3fd/assets/img/rstudio-icon.png)
+
+This will fire up your RStudio.]
+
+
+---
+
+
+Click on the 
+This document is an **RMarkdown** file.
+
+--
+
+In RMarkdown:
+- A **Textbook** <u>and</u> a **Notebook** are one
+- The **Author** <u>and</u> the **Student** is you
+- **Language** <u>and</u> **`Code`** are English ( almost)
+
+--
+
+What you write as your Notes and Explanations, becomes part of the textbook. 
+
+
+--
+
+What you write as code makes your own **Figures**
+
+--
+
+
+(How many times did Amma tell you not to write in your textbook?)
+
+---
+layout: true
+# Editing your Markdown
+---
+
+1. Everything is text
+
+2. Single stars make *italic* text
+
+3. Double stars **bold** text
+
+4. Three stars make  ***both bold and italic*** text
+
+5. Double tildes make ~~deleted text~~
+
+6. Hashes(`##`) become new Section Titles in text
+
+
+---
+
+1. Ctrl+Alt+I / CMD+Alt+I give code "chunks" which will "run".
+
+2. Hashes(`#`) inside code chunks give you new #comments in code
+
+3. "$mathstuff$" becomes $math$ like this (Nooo...please! No!)
+  - $sin^2(x)+cos^2(x) = 1$ (I think)
+4. emo::ji("laugh") becomes `r emo::ji("laugh")`
+
+
+--
+
+All this done with `plain text`. Just your keyboard and you. 
+
+Mouses and Touchpads are for....**(your favourite word of ridicule here)**.
+
+---
+layout: true
+# Knitting your Markdown
+---
+
+`knit` `r emo::ji("knit")` changes your plain text to:
+
+- html `r emo::ji("web")`, or PDF `r emo::ji("file")` or Word `r emo::ji("document")`
+
+- webpage, or blog, or flexdashboards
+
+- as interactive presentation like this one
+
+- over 30 different output formats. 
+
+???
+Ask them to hit the knit button now. 
+---
+
+# What the Heck is a Grammar of Graphics?
+
+Google defines a **grammar** as 
+> "the whole system and structure of a language or of languages in general, usually taken as consisting of *syntax* and *morphology* (including inflections) and sometimes also *phonology* and *semantics*".
+
+> [^2] Others consider a grammar to be "the fundamental principles or rules of an art or science".[^3].
+
+
+Think of **R** as a way of using **GEOMETRY** as the *target domain* to describe information/ideas/concepts from *any* **source domain**.(Lakoff and Johnson).[^4]
+
+Applied to visualizations, a **grammar of graphics** is a grammar used to describe and create a wide range of statistical graphics.[^5].
+
+And we will use that grammar to allude geometrically to other source domain things.
+
+---
+
+# And `Layers`?
+
+All graphics in **R** are built like a sandwich to create the final graphic.
+
+Each slice is a fresh set of graphs/geometric objects on the visual. ( But what about lettuce, and cheese and mint-mayo...)
+
+The **layered** grammar of graphics approach is implemented in an R-package called [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html), a widely used graphics library for R. 
+
+
+---
+
+class: center, middle
+## PAUSE #1
+
+
+Are there any silent tears? 
+
+---
+
+## Let the R-ring begin
+
+
+---
+
+## Components of the layered grammar of graphics
+
+### Layer
+
+**Layers** are used to create the objects on a plot. They are defined by five basic parts:
+
+--
+
+1.  Data ( What dataset/spreadsheet am I using?)
+
+--
+
+2.  Mapping ( What does each column do in my graph?)
+
+--
+
+3.  Statistical transformation (stat) (Do I have calculate something first?)
+
+--
+
+4.  Geometric object (geom) ( What shape, colour, size..do I want?)
+
+--
+
+5.  Position adjustment (position) ( Where do I want it on the graph?)
+
+---
+
+# Tidy Data
+![Tidy data](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/tidydata_1.jpg)
+
+---
+
+# Kinds of Variable
+
+Variables in the dataset are defined by the kind of questions they answer to:
+
+--
+1.  What / Who / Where? -> Some kind of Name or Category (Remember Lars Gustaffson)
+
+    - Map on to ( i.e.Plot with)  shape / colour/ size
+--
+
+2.  What Kind? How? -> Some kind "Type"
+
+    - Map on to shape/ colour/ size
+--
+
+3.  How Many? How large? -> Some kind of Quantity
+
+    - Map on to points / lines / bars / ....
+
+---
+
+# Data and mapping
+
+We can map variables metaphorically to *geometric* things in R: 
+
+- shape, colour, size, alpha(how dark?)....
+
+we will now use "real world" data. Let's use the `penguins` dataset in the `palmerpenguins` package.,sub[^6]</sub>
+
+[^6]: Run `?penguins` in the console to get more information about this dataset.
+
+```{r penguins,highlight.output = c(4,5,6)}
+head(penguins, n = 3)
+```
+
+
+
+---
+**Aesthetic Mapping** defines how the variables are applied to the plot. So if we were graphing information from `penguins`, we might map a penguin's flipper_length_mm to the $x$ position and body_mass_g to the $y$ position.
+We can map variables metaphorically to other things: shape, colour, size, alpha(how dark?)....
+
+---
+Blank Slide 1
+---
+.pull-left[
+```{r first-plot1a, eval=FALSE, message=FALSE,warning=FALSE}
+ggplot(penguins) #<<
+```
+]
+.pull-right[
+```{r first-plot1a-out, ref.label='first-plot1a', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot1b, eval=FALSE, message=FALSE, warning=FALSE}
+ggplot(penguins, 
+       aes(x = bill_length_mm,#<<
+           y = body_mass_g))  #<<
+```
+]
+
+.pull-right[
+```{r first-plot1b-out, ref.label='first-plot1b', echo=FALSE, message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot1c, eval=FALSE, message=FALSE,warning=FALSE}
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = body_mass_g)) +
+  geom_point() #<<
+```
+]
+
+.pull-right[
+```{r first-plot1c-out, ref.label='first-plot1c', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot1d, eval=FALSE, message=FALSE,warning=FALSE}
+ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = body_mass_g)) +
+  geom_point() +
+  geom_smooth(method = "lm") #<<
+```
+]
+
+.pull-right[
+```{r first-plot1d-out, ref.label='first-plot1d', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+## Blank Slide
+---
+## Yet Another Blank Slide
+---
+.pull-left[
+```{r first-plot2a, eval=FALSE, message=FALSE, warning=FALSE}
+ggplot(penguins) #<<
+```
+]
+.pull-right[
+```{r first-plot2a-out, ref.label='first-plot2a', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot2b, eval=FALSE, message=FALSE, warning=FALSE}
+ggplot(penguins,
+       aes(x = species, #<<
+           y = body_mass_g))  #<<
+```
+]
+
+.pull-right[
+```{r first-plot2b-out, ref.label='first-plot2b', echo=FALSE, message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot2c, eval=FALSE, message=FALSE,warning=FALSE}
+ggplot(penguins, 
+       aes(x = species, 
+           y = body_mass_g)) +
+  geom_boxplot() #<<
+```
+]
+
+.pull-right[
+```{r first-plot2c-out, ref.label='first-plot2c', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+.pull-left[
+```{r first-plot2d, eval=FALSE, message=FALSE,warning=FALSE}
+ggplot(penguins, 
+       aes(x = species, 
+           y = body_mass_g)) +
+  geom_boxplot() +
+  facet_wrap(~island) #<<
+```
+]
+
+.pull-right[
+```{r first-plot2d-out, ref.label='first-plot2d', echo=FALSE,message=FALSE,warning=FALSE, out.width="100%"}
+```
+]
+---
+
+layout: true
+# gg is for Grammar of Graphics
+
+.left-column[
+### Data
+### Aesthetics
+### Geoms
+
+```r
+g + geom_*()
+```
+]
+
+---
+
+.right-column[
+```r
+geom_*(mapping, data, stat, position)
+```
+
+- `data` Geoms can have their own data
+    - Has to map onto global coordinates
+
+- `map` Geoms can have their own aesthetics
+    - Inherits global aesthetics
+    - Have geom-specific aesthetics
+        - `geom_point` needs `x` and `y`, optional `shape`, `color`, `size`, etc.
+        - `geom_ribbon` requires `x`, `ymin` and `ymax`, optional `fill`
+    - `?geom_ribbon`
+]
+
+---
+
+.right-column[
+```r
+geom_*(mapping, data, stat, position)
+```
+
+- `stat` Some geoms apply further transformations to the data
+    - All respect `stat = 'identity'`
+    - Ex: `geom_histogram` uses `stat_bin()` to group observations
+    
+- `position` Some adjust location of objects
+    - `'dodge'`, `'stack'`, `'jitter'`
+]
+
+---
+layout: false
+
+.pull-left-50[
+<div style="background-color:#fdebd0">Left content</div>
+]
+
+.pull-right-50[
+<div style="background-color:#eaf2f8">Right content</div>
+.pull-left-60[
+<div style="background-color:#d0ece7">Inner left content</div>
+]
+.pull-right-40[
+<div style="background-color:#f2d7d5">Inner right content</div>
+]
+]
+
+---
+
+# References
+
+[^2]: [Google search for "grammar"](https://www.google.com/search?q=grammar)
+
+[^3]: [Wickham, Hadley. (2010) "A Layered Grammar of Graphics". *Journal of Computational and Graphical Statistics*, 19(1).](http://www.jstor.org.proxy.uchicago.edu/stable/25651297)
+
+[^4]: [Wilkinson, Leland. (2005). *The Grammar of Graphics*. (UChicago authentication required)](http://link.springer.com.proxy.uchicago.edu/book/10.1007%2F0-387-28695-0)
+
+[^5]: [Lakoff, George. (2005). *Metaphors we live by*. (UChicago authentication required)](http://link.springer.com.proxy.uchicago.edu/book/10.1007%2F0-387-28695-0)

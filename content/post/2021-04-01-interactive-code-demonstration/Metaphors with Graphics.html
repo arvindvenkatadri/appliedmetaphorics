@@ -1,0 +1,623 @@
+---
+title: "Metaphors with Graphics"
+subtitle: "For Artists and non-Coders"
+caption: "Made with the xaringan package"
+author: "Arvind Venkatadri"
+institute: "Srishti Manipal Institute"
+date: "(2021-04-01)"
+output:
+  xaringan::moon_reader:
+    lib_ir: libs
+    css: ["default", "ninjutsu", "code_demo.css", "fonts_mtheme.css"]
+    # yolo: false
+    #   img: images/Scottish_Fold_Cat.jpg 
+    #   times: 5
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      # autoplay: 30000
+      #countdown: 60000
+---
+
+<script src="Metaphors with Graphics_files/header-attrs/header-attrs.js"></script>
+
+
+<p>name: title_slide</p>
+<div id="to-err-r-is-human" class="section level2">
+<h2>To <del>err</del> R is human</h2>
+<p>Let’s talk about what our Generic Skills course is all about.</p>
+<p>name: content
+class: spaced</p>
+</div>
+<div id="contents" class="section level2">
+<h2>Contents</h2>
+<ul>
+<li><a href="#rstudio">RStudio</a> What the heck am I looking at?</li>
+<li><a href="#intro_rmarkdown">RMarkdown</a></li>
+<li><a href="#slides">Slides</a></li>
+<li><a href="#layout">Layout</a></li>
+<li><a href="#text_formatting_1">Text formatting</a></li>
+<li><a href="#code">Code formatting</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#images_markdown">Images</a></li>
+<li><a href="#math">Math expressions</a></li>
+<li><a href="#table_kable">Tables</a></li>
+<li><a href="#plot_static_base">Static plots</a></li>
+<li><a href="#plot_interactive_highcharter">Interactive plots</a></li>
+<li><a href="#plot_interactive_leaflet">Maps</a></li>
+<li><a href="#plot_interactive_crosstalk">Crosstalk</a></li>
+<li><a href="#tips">General tips</a></li>
+</ul>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td># What are we going to do
+We will:</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li>First examine data and geometric graphics from a metaphoric standpoint.</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Develop graphics using a bunch of “graphical metaphors”</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Try to do that in something resembling <strong>English gRammaR</strong> ( well, nearly, it is code after all !!)</li>
+</ol>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td># And Why R we doing this, again?</td>
+</tr>
+</tbody>
+</table>
+<div id="we-are-deeply-interested-in-the-making-and-analysis-of-metaphors" class="section level3">
+<h3>We are deeply interested in the making and analysis of metaphors</h3>
+<p>–</p>
+</div>
+<div id="this-will-help-us-appreciate-triz-when-we-get-there" class="section level3">
+<h3>This will help us appreciate <strong>TRIZ</strong> when we get there!</h3>
+<ul>
+<li><p>Metaphors take information from a <em>source</em> <strong>DOMAIN</strong>.</p></li>
+<li><p>And portray it in the <em>language</em> of the <em>target</em> Domain</p></li>
+</ul>
+<hr />
+<ul>
+<li><p>In R, we will take data from diverse <strong>source Domains</strong></p>
+<ul>
+<li>Ecology</li>
+<li>Finance</li>
+<li>Jewellery ( yeah!)</li>
+<li>Weather</li>
+<li>Star Wars</li>
+<li>…</li>
+</ul></li>
+</ul>
+<p>–</p>
+<ul>
+<li>And make metaphors out of them</li>
+</ul>
+<hr />
+<ul>
+<li>Only our <strong>target Domain</strong> will be…Geometry. Hence, <strong>R</strong></li>
+</ul>
+<p>–</p>
+<ul>
+<li>Did I say: “To R is human”….</li>
+</ul>
+<p>Well, you learn
+- the alphabet and then words, vocab;</p>
+<ul>
+<li><p><strong>and then</strong> sentences, paras, idioms, figure of speech;</p></li>
+<li><p><strong>and then</strong> poetry along with cadence, prosody, and metre;</p></li>
+<li><p><strong>and then</strong> drama and Greek Choruses…..</p></li>
+</ul>
+<p>–</p>
+<ul>
+<li>And then you read Shakespeare. Simple.</li>
+</ul>
+<hr />
+<p>NO.</p>
+<p>–</p>
+<p>You read Shakespeare directly, and reach for a dictionary when needed.</p>
+<p>And you get better at it as you go.</p>
+<p>–</p>
+<p>We will do that also with <del>ShakespeaRe</del> R.</p>
+<hr />
+<p>In the following, there are ready-made Shakespearean pieces of R code.</p>
+<p>(Oh, all right, all right, all right. )</p>
+<p>–</p>
+<p><del>To code or not to code, that is the question…</del></p>
+<p>–</p>
+<p>There’s not to reason why, there’s but to code and <del>die</del> fly!!</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>layout: false</td>
+</tr>
+<tr class="even">
+<td>name: r-studio</td>
+</tr>
+<tr class="odd">
+<td>## What on earth am I looking at?
+This is <strong>RStudio</strong>, a integrated development environment ( IDE ) for <strong>R</strong></td>
+</tr>
+<tr class="even">
+<td>( And Python, JS, SQL, D3 and a few other computer languages. )</td>
+</tr>
+<tr class="odd">
+<td><img src="https://bookdown.org/maddocent/exploratory_data_analysis/_book/images/rstudio_interface.png" alt="RStudio" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ok-what-the-heck-are-r-and-rstudio" class="section level1">
+<h1>OK, what the Heck are R and RStudio?</h1>
+<p>.pull-left[
+1. <a href="https://cran.r-project.org/">R</a> is a free and open source language</p>
+<div class="figure">
+<img src="https://www.r-project.org/Rlogo.png" alt="" />
+<p class="caption">R</p>
+</div>
+<p>]</p>
+<p>.pull-right[
+2. RStudio is a programming environment that makes R coding easy.</p>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/62bcc8535a06077094ca3c29c383e37ad7334311/a263f/assets/img/logo.svg" alt="RStudio" />
+]</p>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>background-image: url(“<a href="https://64.media.tumblr.com/5b597a2ad23f997216ee85a0b4420ffe/tumblr_offcw8Xas61v85w7qo1_400.gifv" class="uri">https://64.media.tumblr.com/5b597a2ad23f997216ee85a0b4420ffe/tumblr_offcw8Xas61v85w7qo1_400.gifv</a>”)
+background-position: center
+background-size: contain</td>
+</tr>
+<tr class="even">
+<td>## R ! Whatever is it good for?</td>
+</tr>
+<tr class="odd">
+<td>???
+Image Credit(<a href="https://mesyman.tumblr.com/post/152219845477" class="uri">https://mesyman.tumblr.com/post/152219845477</a>)</td>
+</tr>
+</tbody>
+</table>
+<div id="absolutely-anything" class="section level2">
+<h2>Absolutely Anything !!</h2>
+<p>.pull-left[
+- <a href="https://www.data-to-viz.com/">Showing Off!</a></p>
+<ul>
+<li><p><a href="https://kind-varahamihira.netlify.app/">More Showing Off!</a></p></li>
+<li><p><a href="https://www.data-imaginist.com/art"><strong>Generative Art</strong></a></p></li>
+<li><p><a href="https://bhaskarvk.github.io/user2017.geodataviz/notebooks/03-Interactive-Maps.nb.html">Making Maps!!</a> and <a href="http://maps.stamen.com/#watercolor/12/1.3164/103.8338">Water-Color Maps</a></p></li>
+</ul>
+<p>]
+.pull-right[
+- <a href="https://blog.rstudio.com/2017/09/11/announcing-blogdown/">Interactive web pages,blogs,</a></p>
+<ul>
+<li><p><a href="https://juliasilge.com/blog/tidy-text-classification/">Analysing Books</a></p></li>
+<li><p><a href="https://bookdown.org/yihui/bookdown/">Writing Books</a></p></li>
+<li><p>Statistical computing and machine learning and AI and…<a href="No....">Are you sure you want to see this?</a>
+]</p></li>
+</ul>
+<p>All depends upon your imagination.</p>
+<hr />
+<p>layout: true
+# PRIMM Process</p>
+<hr />
+<ul>
+<li><h2 id="predict-what-the-code-does-write-predictions.-work-in-pairs"><strong>PREDICT</strong> what the code does, write predictions. Work In pairs</h2></li>
+</ul>
+<blockquote>
+<p><em>I think Hamlet was gay</em></p>
+</blockquote>
+<hr />
+<ul>
+<li><strong>RUN</strong> the code provided and see what it does. Check against your prediction</li>
+</ul>
+<table style="width:4%;">
+<colgroup>
+<col width="4%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>&gt; <em>I am going to say “forsooth” in my Reflections</em></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>INVESTIGATE</strong> What the <strong>code parameters</strong> do ?</li>
+</ul>
+<blockquote>
+<p>Write <strong>comments</strong> to explain</p>
+</blockquote>
+<blockquote>
+<p>There are lots of different activities you can do at this stage:
+- trace through the code,
+- comment the code,
+- answer questions about it,
+- label particular concepts, highlight it,
+- draw the flow of control, etc.</p>
+</blockquote>
+<p>–</p>
+<blockquote>
+<p># Hamlet is not Gay.</p>
+</blockquote>
+<blockquote>
+<p># (Also, Arvind is not Cool. Sorry. )</p>
+</blockquote>
+<blockquote>
+<p># This R shape thingy makes everything into small squares…</p>
+</blockquote>
+<hr />
+<ul>
+<li><strong>MODIFY</strong> the code parameters provided to understand the options available.</li>
+</ul>
+<p>–</p>
+<blockquote>
+<p>Sword = “pink” ?</p>
+</blockquote>
+<blockquote>
+<p>Size = Uneasy_Crown?</p>
+</blockquote>
+<hr />
+<ul>
+<li><strong>MAKE</strong> : take an idea/concept/data of your own, and graph it.</li>
+</ul>
+<p>–</p>
+<blockquote>
+<p>( My next Insta will be an Outrageous Sling of Fortune…).</p>
+</blockquote>
+<hr />
+<ul>
+<li><p><strong>Predict</strong>: What could happen?</p></li>
+<li><p><strong>Run</strong>: the code and see</p></li>
+<li><p><strong>Investigate</strong>: What could really be happening?</p></li>
+<li><p><strong>Modify</strong>: Mess with the code and try</p></li>
+<li><p><strong>Make</strong>: Some thing brand new for yourself</p></li>
+</ul>
+<div id="reference" class="section level3">
+<h3>Reference:</h3>
+<p><a href="https://blogs.kcl.ac.uk/cser/2017/09/01/primm-a-structured-approach-to-teaching-programming/" class="uri">https://blogs.kcl.ac.uk/cser/2017/09/01/primm-a-structured-approach-to-teaching-programming/</a></p>
+<p>–</p>
+<p>Click on this icon in your Applications folder:</p>
+<p>.center[
+<img src="https://d33wubrfki0l68.cloudfront.net/521a038ed009b97bf73eb0a653b1cb7e66645231/8e3fd/assets/img/rstudio-icon.png" alt="this icon" /></p>
+<p>This will fire up your RStudio.]</p>
+<hr />
+<p>Click on the
+This document is an <strong>RMarkdown</strong> file.</p>
+<p>–</p>
+<p>In RMarkdown:
+- A <strong>Textbook</strong> <u>and</u> a <strong>Notebook</strong> are one
+- The <strong>Author</strong> <u>and</u> the <strong>Student</strong> is you
+- <strong>Language</strong> <u>and</u> <strong><code>Code</code></strong> are English ( almost)</p>
+<p>–</p>
+<p>What you write as your Notes and Explanations, becomes part of the textbook.</p>
+<p>–</p>
+<p>What you write as code makes your own <strong>Figures</strong></p>
+<p>–</p>
+<p>(How many times did Amma tell you not to write in your textbook?)</p>
+<ol style="list-style-type: decimal">
+<li><p>Everything is text</p></li>
+<li><p>Single stars make <em>italic</em> text</p></li>
+<li><p>Double stars <strong>bold</strong> text</p></li>
+<li><p>Three stars make <strong><em>both bold and italic</em></strong> text</p></li>
+<li><p>Double tildes make <del>deleted text</del></p></li>
+<li><p>Hashes(<code>##</code>) become new Section Titles in text</p></li>
+</ol>
+<hr />
+<ol style="list-style-type: decimal">
+<li><p>Ctrl+Alt+I / CMD+Alt+I give code “chunks” which will “run”.</p></li>
+<li><p>Hashes(<code>#</code>) inside code chunks give you new #comments in code</p></li>
+<li><p>“<span class="math inline">\(mathstuff\)</span>” becomes <span class="math inline">\(math\)</span> like this (Nooo…please! No!)</p></li>
+</ol>
+<ul>
+<li><span class="math inline">\(sin^2(x)+cos^2(x) = 1\)</span> (I think)</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>emo::ji(“laugh”) becomes 😆</li>
+</ol>
+<p>–</p>
+<p>All this done with <code>plain text</code>. Just your keyboard and you.</p>
+<p>Mouses and Touchpads are for….<strong>(your favourite word of ridicule here)</strong>.</p>
+<p><code>knit</code> 🧶 changes your plain text to:</p>
+<ul>
+<li><p>html 🕸, or PDF 🗃 or Word 📜</p></li>
+<li><p>webpage, or blog, or flexdashboards</p></li>
+<li><p>as interactive presentation like this one</p></li>
+<li><p>over 30 different output formats.</p></li>
+</ul>
+<p>???
+Ask them to hit the knit button now.
+—</p>
+</div>
+</div>
+</div>
+<div id="what-the-heck-is-a-grammar-of-graphics" class="section level1">
+<h1>What the Heck is a Grammar of Graphics?</h1>
+<p>Google defines a <strong>grammar</strong> as
+&gt; “the whole system and structure of a language or of languages in general, usually taken as consisting of <em>syntax</em> and <em>morphology</em> (including inflections) and sometimes also <em>phonology</em> and <em>semantics</em>”.</p>
+<blockquote>
+<p><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Others consider a grammar to be “the fundamental principles or rules of an art or science”.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+</blockquote>
+<p>Think of <strong>R</strong> as a way of using <strong>GEOMETRY</strong> as the <em>target domain</em> to describe information/ideas/concepts from <em>any</em> <strong>source domain</strong>.(Lakoff and Johnson).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>Applied to visualizations, a <strong>grammar of graphics</strong> is a grammar used to describe and create a wide range of statistical graphics.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p>And we will use that grammar to allude geometrically to other source domain things.</p>
+<hr />
+</div>
+<div id="and-layers" class="section level1">
+<h1>And <code>Layers</code>?</h1>
+<p>All graphics in <strong>R</strong> are built like a sandwich to create the final graphic.</p>
+<p>Each slice is a fresh set of graphs/geometric objects on the visual. ( But what about lettuce, and cheese and mint-mayo…)</p>
+<p>The <strong>layered</strong> grammar of graphics approach is implemented in an R-package called <a href="https://cran.r-project.org/web/packages/ggplot2/index.html"><code>ggplot2</code></a>, a widely used graphics library for R.</p>
+<hr />
+<p>class: center, middle
+## PAUSE #1</p>
+<p>Are there any silent tears?</p>
+<hr />
+<div id="let-the-r-ring-begin" class="section level2">
+<h2>Let the R-ring begin</h2>
+<hr />
+</div>
+<div id="components-of-the-layered-grammar-of-graphics" class="section level2">
+<h2>Components of the layered grammar of graphics</h2>
+<div id="layer" class="section level3">
+<h3>Layer</h3>
+<p><strong>Layers</strong> are used to create the objects on a plot. They are defined by five basic parts:</p>
+<p>–</p>
+<ol style="list-style-type: decimal">
+<li>Data ( What dataset/spreadsheet am I using?)</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Mapping ( What does each column do in my graph?)</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Statistical transformation (stat) (Do I have calculate something first?)</li>
+</ol>
+<p>–</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Geometric object (geom) ( What shape, colour, size..do I want?)</li>
+</ol>
+<p>–</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Position adjustment (position) ( Where do I want it on the graph?)</li>
+</ol>
+<hr />
+</div>
+</div>
+</div>
+<div id="tidy-data" class="section level1">
+<h1>Tidy Data</h1>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/tidydata_1.jpg" alt="" />
+<p class="caption">Tidy data</p>
+</div>
+<hr />
+</div>
+<div id="kinds-of-variable" class="section level1">
+<h1>Kinds of Variable</h1>
+<p>Variables in the dataset are defined by the kind of questions they answer to:</p>
+<table style="width:4%;">
+<colgroup>
+<col width="4%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>1. What / Who / Where? -&gt; Some kind of Name or Category (Remember Lars Gustaffson)</td>
+</tr>
+<tr class="even">
+<td>- Map on to ( i.e.Plot with) shape / colour/ size</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li><p>What Kind? How? -&gt; Some kind “Type”</p>
+<ul>
+<li><h2 id="map-on-to-shape-colour-size">Map on to shape/ colour/ size</h2></li>
+</ul></li>
+<li><p>How Many? How large? -&gt; Some kind of Quantity</p>
+<ul>
+<li>Map on to points / lines / bars / ….</li>
+</ul></li>
+</ol>
+<hr />
+</div>
+<div id="data-and-mapping" class="section level1">
+<h1>Data and mapping</h1>
+<p>We can map variables metaphorically to <em>geometric</em> things in R:</p>
+<ul>
+<li>shape, colour, size, alpha(how dark?)….</li>
+</ul>
+<p>we will now use “real world” data. Let’s use the <code>penguins</code> dataset in the <code>palmerpenguins</code> package.,sub<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></sub></p>
+<pre class="r"><code>head(penguins, n = 3)</code></pre>
+<pre><code>## # A tibble: 3 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_~ body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Adelie  Torge~           39.1          18.7              181        3750 male 
+## 2 Adelie  Torge~           39.5          17.4              186        3800 fema~
+## 3 Adelie  Torge~           40.3          18                195        3250 fema~
+## # ... with 1 more variable: year &lt;int&gt;</code></pre>
+<table style="width:6%;">
+<colgroup>
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Aesthetic Mapping</strong> defines how the variables are applied to the plot. So if we were graphing information from <code>penguins</code>, we might map a penguin’s flipper_length_mm to the <span class="math inline">\(x\)</span> position and body_mass_g to the <span class="math inline">\(y\)</span> position.
+We can map variables metaphorically to other things: shape, colour, size, alpha(how dark?)….</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Blank Slide 1</td>
+</tr>
+</tbody>
+</table>
+<p>.pull-left[</p>
+<pre class="r"><code>ggplot(penguins) #&lt;&lt;</code></pre>
+<p>]
+.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot1a-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins, 
+       aes(x = bill_length_mm,#&lt;&lt;
+           y = body_mass_g))  #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot1b-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = body_mass_g)) +
+  geom_point() #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot1c-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins, 
+       aes(x = bill_length_mm, 
+           y = body_mass_g)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;) #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot1d-out-1.png" width="100%" />]
+—
+## Blank Slide
+—
+## Yet Another Blank Slide
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins) #&lt;&lt;</code></pre>
+<p>]
+.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot2a-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins,
+       aes(x = species, #&lt;&lt;
+           y = body_mass_g))  #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot2b-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins, 
+       aes(x = species, 
+           y = body_mass_g)) +
+  geom_boxplot() #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot2c-out-1.png" width="100%" />]
+—
+.pull-left[</p>
+<pre class="r"><code>ggplot(penguins, 
+       aes(x = species, 
+           y = body_mass_g)) +
+  geom_boxplot() +
+  facet_wrap(~island) #&lt;&lt;</code></pre>
+<p>]</p>
+<p>.pull-right[
+<img src="/post/Metaphors%20with%20Graphics_files/figure-html/first-plot2d-out-1.png" width="100%" />]
+—</p>
+<p>layout: true
+# gg is for Grammar of Graphics</p>
+<p>.left-column[
+### Data
+### Aesthetics
+### Geoms</p>
+<pre class="r"><code>g + geom_*()</code></pre>
+<p>]</p>
+<hr />
+<p>.right-column[</p>
+<pre class="r"><code>geom_*(mapping, data, stat, position)</code></pre>
+<ul>
+<li><code>data</code> Geoms can have their own data
+<ul>
+<li>Has to map onto global coordinates</li>
+</ul></li>
+<li><code>map</code> Geoms can have their own aesthetics
+<ul>
+<li>Inherits global aesthetics</li>
+<li>Have geom-specific aesthetics
+<ul>
+<li><code>geom_point</code> needs <code>x</code> and <code>y</code>, optional <code>shape</code>, <code>color</code>, <code>size</code>, etc.</li>
+<li><code>geom_ribbon</code> requires <code>x</code>, <code>ymin</code> and <code>ymax</code>, optional <code>fill</code></li>
+</ul></li>
+<li><code>?geom_ribbon</code>
+]</li>
+</ul></li>
+</ul>
+<hr />
+<p>.right-column[</p>
+<pre class="r"><code>geom_*(mapping, data, stat, position)</code></pre>
+<ul>
+<li><code>stat</code> Some geoms apply further transformations to the data
+<ul>
+<li>All respect <code>stat = 'identity'</code></li>
+<li>Ex: <code>geom_histogram</code> uses <code>stat_bin()</code> to group observations</li>
+</ul></li>
+<li><code>position</code> Some adjust location of objects
+<ul>
+<li><code>'dodge'</code>, <code>'stack'</code>, <code>'jitter'</code>
+]</li>
+</ul></li>
+</ul>
+<hr />
+<p>layout: false</p>
+.pull-left-50[
+<div style="background-color:#fdebd0">
+Left content
+</div>
+<p>]</p>
+.pull-right-50[
+<div style="background-color:#eaf2f8">
+Right content
+</div>
+.pull-left-60[
+<div style="background-color:#d0ece7">
+Inner left content
+</div>
+]
+.pull-right-40[
+<div style="background-color:#f2d7d5">
+Inner right content
+</div>
+<p>]
+]</p>
+<hr />
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://www.google.com/search?q=grammar">Google search for “grammar”</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://www.jstor.org.proxy.uchicago.edu/stable/25651297">Wickham, Hadley. (2010) “A Layered Grammar of Graphics”. <em>Journal of Computational and Graphical Statistics</em>, 19(1).</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="http://link.springer.com.proxy.uchicago.edu/book/10.1007%2F0-387-28695-0">Wilkinson, Leland. (2005). <em>The Grammar of Graphics</em>. (UChicago authentication required)</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><a href="http://link.springer.com.proxy.uchicago.edu/book/10.1007%2F0-387-28695-0">Lakoff, George. (2005). <em>Metaphors we live by</em>. (UChicago authentication required)</a><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Run <code>?penguins</code> in the console to get more information about this dataset.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
